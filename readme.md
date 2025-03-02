@@ -22,6 +22,7 @@
 ### 1️⃣ Клонирование репозитория
 ```sh
 git clone https://github.com/iurij-n/Django-JWT-Tasks-API.git
+cd Django-JWT-Tasks-API
 ```
 
 ### 2️⃣ Создание и активация виртуального окружения
