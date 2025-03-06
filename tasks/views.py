@@ -1,6 +1,12 @@
-from rest_framework import viewsets, permissions
+from rest_framework import permissions, viewsets
+from rest_framework.pagination import PageNumberPagination
+
 from .models import Task
 from .serializers import TaskSerializer
+
+
+class TaskPagination(PageNumberPagination):
+    page_size_query_param = "page_size"
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -8,6 +14,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     queryset = model.get_queryset()
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated]
+    pagination_class = TaskPagination
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
