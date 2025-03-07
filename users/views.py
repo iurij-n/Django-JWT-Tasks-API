@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import UserRegistrationSerializer
+from .serializers import UserRegistrationSerializer, UserSerializer
 
 
 class RegistrationView(APIView):
@@ -42,3 +42,13 @@ class LogoutView(APIView):
         else:
             token.blacklist()
             return Response(status=status.HTTP_205_RESET_CONTENT)
+
+
+class UserDetailView(APIView):
+    """Детали пользователя"""
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        return Response(
+            UserSerializer(request.user).data
+        )
